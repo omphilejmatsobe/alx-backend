@@ -49,15 +49,15 @@ class LRUCache(BaseCaching):
         Removes the earliest item from the cache at MAX size
         """
 
-        keyOut = None
+        _key = None
         with self.__rlock:
-            keysLength = len(self.__keys)
+            keyLength = len(self.__keys)
             if keyIn not in self.__keys:
                 if len(self.cache_data) == BaseCaching.MAX_ITEMS:
-                    keyOut = self.__keys.pop(0)
+                    _key = self.__keys.pop(0)
                     self.cache_data.pop(_key)
             else:
                 self.__keys.remove(keyIn)
-            self.__keys.insert(keysLength, keyIn)
+            self.__keys.insert(keyLength, keyIn)
 
         return _key
