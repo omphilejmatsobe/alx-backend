@@ -13,7 +13,6 @@ class LRUCache(BaseCaching):
     Inherits from BaseCaching and is a caching system
     """
 
-
     def __init__(self):
         """
         Instantiation method, sets instance attributes
