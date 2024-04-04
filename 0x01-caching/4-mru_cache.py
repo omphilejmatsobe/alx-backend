@@ -13,7 +13,6 @@ class MRUCache(BaseCaching):
     class that inherits from BaseCaching and is a caching system
     """
 
-
     def __init__(self):
         """
         Instantiation method, sets instance attributes
