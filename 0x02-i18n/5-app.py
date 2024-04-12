@@ -5,7 +5,7 @@ Determines the best match with supported languages
 
 from flask import Flask, render_template, request
 from flask_babel import Babel
-
+from flask import g, request
 
 class Config:
     """
@@ -34,6 +34,7 @@ def get_locale() -> str:
         return locale
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
+
 users = {
     1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
     2: {"name": "Beyonce", "locale": "en", "timezone": "US/Central"},
@@ -41,11 +42,13 @@ users = {
     4: {"name": "Teletubby", "locale": None, "timezone": "Europe/London"},
 }
 
+
 def get_user(id) -> Union[Dict[str, Union[str, None]], None]:
     """
     Validates user login details.
     """
     return users.get(int(id), 0)
+
 
 @app.before_request
 def before_request():
@@ -53,6 +56,7 @@ def before_request():
     Adds valid user to the global session object `g`
     """
     setattr(g, 'user', get_user(request.args.get('login_as', 0)))
+
 
 @app.route('/')
 def index() -> str:
